@@ -1,9 +1,19 @@
 **NB: This is an experimental library, nothing is stable at this point**
 
+```
+com.itonomi/komponentkassen {:git/sha "63f26047ec9d1e8e611c164f5259f8b706656591"
+                             :git/url "https://github.com/itonomi/komponentkassen.git"}
+```
+
+
 ## Index
 
+**com.itonomi.komponentkassen.shell**: behaviourless, low-level components
+
 **com.itonomi.komponentkassen.core**: ui primitives - focused on correctness, flexibility and composability
+
 **com.itonomi.komponentkassen.convenient**: extra convenient APIs for getting up and running quickly
+
 **com.itonomi.komponentkassen.demo**: playground and staging area, not to be used by library consumers
 
 ## Use in [Electric 3 Starter App](https://gitlab.com/hyperfiddle/electric3-starter-app) based application
