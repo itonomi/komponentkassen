@@ -1,0 +1,8 @@
+node_modules
+package-lock.json
+design-tokens
+design-tokens-build
+**/.clj-kondo/.cache/
+**/.cpcache/
+**/.lsp/.cache/
+**/.DS_Store

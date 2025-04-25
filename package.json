@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@digdir/designsystemet": "^1.0.3",
+    "@digdir/designsystemet-css": "^1.0.3",
+    "@digdir/designsystemet-theme": "^1.0.3"
+  }
+}
