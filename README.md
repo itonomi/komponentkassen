@@ -1,3 +1,5 @@
+**NB: This is an experimental library, nothing is stable at this point**
+
 ## Index
 
 **com.itonomi.komponentkassen.core**: ui primitives - focused on correctness, flexibility and composability
@@ -5,8 +7,6 @@
 **com.itonomi.komponentkassen.demo**: playground and staging area, not to be used by library consumers
 
 ## Use in [Electric 3 Starter App](https://gitlab.com/hyperfiddle/electric3-starter-app) based application
-
-See [27fc88c46ce0d7cf82df8b965c8bc47a4c782ac5](https://github.com/itonomi/proto-agent-graphs/commit/27fc88c46ce0d7cf82df8b965c8bc47a4c782ac5) for an example of installing the library.
 
 ```html
 <link
