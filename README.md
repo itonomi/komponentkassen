@@ -5,15 +5,11 @@ com.itonomi/komponentkassen {:git/sha "63f26047ec9d1e8e611c164f5259f8b706656591"
                              :git/url "https://github.com/itonomi/komponentkassen.git"}
 ```
 
-
 ## Index
 
 **com.itonomi.komponentkassen.shell**: behaviourless, low-level components
-
 **com.itonomi.komponentkassen.core**: ui primitives - focused on correctness, flexibility and composability
-
 **com.itonomi.komponentkassen.convenient**: extra convenient APIs for getting up and running quickly
-
 **com.itonomi.komponentkassen.demo**: playground and staging area, not to be used by library consumers
 
 ## Use in [Electric 3 Starter App](https://gitlab.com/hyperfiddle/electric3-starter-app) based application
@@ -53,39 +49,36 @@ NB: this removes `resources/public/`!!!!!
 !!!!!!!!!!!!
 
 ```
-VERSION='1.0.3' npm install "@digdir/designsystemet@$VERSION" "@digdir/designsystemet-css@$VERSION" "@digdir/designsystemet-theme@$VERSION"
+VERSION='1.0.5' npm install "@digdir/designsystemet@$VERSION" "@digdir/designsystemet-css@$VERSION" "@digdir/designsystemet-theme@$VERSION"
+
 npx @digdir/designsystemet tokens create \
 --main-colors "primary:#0062BA" "accent:#1E98F5" \
 --neutral-color "#1E2B3C" \
 --support-colors "extra1:#F45F63" "extra2:#E5AA20" \
 --border-radius 4 \
 --theme "itonomi"
-npx @digdir/designsystemet@next tokens build
+
+npx @digdir/designsystemet tokens create \
+--main-colors "primary:#0062BA" \
+--neutral-color "#1E2B3C" \
+--border-radius 4 \
+--theme "kunnskapsassistenten"
+
+npx @digdir/designsystemet tokens build
 rm -rf resources/public/
 mkdir -p resources/public/komponentkassen/
 cp ./node_modules/@digdir/designsystemet-css/dist/src/index.css resources/public/komponentkassen/
 cp -R design-tokens-build/itonomi* resources/public/komponentkassen/
+cp -R design-tokens-build/kunnskapsassistenten* resources/public/komponentkassen/
+
+git clone https://github.com/navikt/aksel.git /tmp/aksel_DELETEME
+mkdir -p resources/public/komponentkassen/icons
+echo 'These icons belong to Nav and are licensed according to https://github.com/navikt/aksel/blob/main/LICENSE' > resources/public/komponentkassen/icons/LICENSE
+mv /tmp/aksel_DELETEME/@navikt/aksel-icons/icons/*.svg resources/public/komponentkassen/icons
+rm -rf /tmp/aksel_DELETEME
+
 ```
 
-## To do
-
-- [x] Distribute as a deps.edn library
-- [x] Set up in ../proto-agent-graphs
-- [x] Rename the toolkit to "komponentkassen" to disambiguate
-- [x] Make it work in practice...
-- [x] Make it right
-- [x] Add component: Card
-- [x] Add component: Heading
-- [x] Add component: Paragraph
-- [x] Add component: Text-field
-- [x] Add component: Spinner
-- [ ] Implement LoginForm from
-      https://next.theme.designsystemet.no > temabygger
-      - this may be done with a pattern state machine
-	  first:
-- [x] Autocomplete (Benjamin requested)
-  - input med forslag som vises under som oppdaterer seg onchange
-  
 **HTML -> Electric prompt** - I use it with *Electric Clojure Hypermind* GPT
 
 ```
