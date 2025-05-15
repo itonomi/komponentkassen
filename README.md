@@ -29,6 +29,9 @@ com.itonomi/komponentkassen {:git/sha "63f26047ec9d1e8e611c164f5259f8b706656591"
   rel="stylesheet"
   href="komponentkassen/index.css"
 />
+<script type="module" src="https://unpkg.com/@u-elements/u-tags@latest/dist/u-tags.js"></script>
+<script type="module" src="https://unpkg.com/@u-elements/u-datalist@latest/dist/u-datalist.js"></script>
+<script type="module" src="https://unpkg.com/@u-elements/u-option@latest/dist/u-option.js"></script>
 ```
 
 ```css
