@@ -100,4 +100,5 @@ Convert to Electric Clojure elements. Not a whole fn.
 - Use svg/svg instead of dom/svg
 - Within svg/svg, use only svg/<element-name> elements, but keep using dom/props
 - Use maps for :style
+- For the u- elements do something like for example u-tags -> (dom-u-tags ...)
 ```
