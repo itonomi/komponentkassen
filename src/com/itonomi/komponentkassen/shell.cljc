@@ -262,3 +262,7 @@
 ;;       BAD: (TabsTab {} (e/fn [] (dom/text "Documents")))
 ;;       ->
 ;;       LESSBAD: (tabsTab (dom/text "Documents"))
+
+(defmacro dom-u-tags [& body] (dom/element* :u-tags body))
+(defmacro dom-u-datalist [& body] (dom/element* :u-datalist body))
+(defmacro dom-u-option [& body] (dom/element* :u-option body))
