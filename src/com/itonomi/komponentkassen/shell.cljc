@@ -89,6 +89,12 @@
                        props))
            (Body)))
 
+(e/defn FieldDescription [props Body]
+  (dom/div (dom/props (merge-props
+                       {:data-field "description"}
+                       props))
+           (Body)))
+
 (e/defn Label
   "https://storybook.designsystemet.no/?path=/docs/komponenter-typography--docs#label"
   [props Body]
