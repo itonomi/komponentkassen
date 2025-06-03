@@ -5,6 +5,15 @@
             [hyperfiddle.electric-forms5 :as forms]))
 
 ;; TODO: reuse the docstring metadata
+
 (e/defn Input [v & props]
   (e/Apply forms/Input v (conj (conj props "ds-input") :class )))
 
+(e/defn Button* [props]
+  (forms/Button* (merge {:class "ds-button"
+                         :variant "primary"
+                         :type "button"}
+                        props)))
+
+(e/defn Button [props]
+  (first (Button* props)))
