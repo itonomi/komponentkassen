@@ -39,6 +39,7 @@
          (-> (fn [ring-request] (-> (ring-response/not-found "Page not found") (ring-response/content-type "text/plain")))
            (wrap-prod-index-page config) ; defined below
            (wrap-resource (:resources-path config))
+           (wrap-resource "public") ; For serving Designsystemet from the classpath
            (wrap-content-type)
            (electric-ring/wrap-electric-websocket (fn [ring-request] (electric-starter-app.main/electric-boot ring-request)))
            (electric-ring/wrap-reject-stale-client config) ; ensures electric client and servers stays in sync.
