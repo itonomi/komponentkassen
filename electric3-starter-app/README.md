@@ -10,7 +10,7 @@
 * Shell: `clj -A:dev -X dev/-main`. 
 * Login instructions will be printed
 * REPL: `:dev` deps alias, `(dev/-main)` at the REPL to start dev build
-* App will start on http://localhost:8080
+* App will start on http://localhost:8083
 * Electric root function: [src/electric_starter_app/main.cljc](src/electric_starter_app/main.cljc)
 * Hot code reloading works: edit -> save -> see app reload in browser
 
