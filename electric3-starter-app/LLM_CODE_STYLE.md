@@ -273,6 +273,15 @@ For example:
   GOOD:
   
   (e/server (transact-todo todo))
+  
+- When working with atoms, use this pattern 
+
+  (let [!my-thing (atom <whatever>)
+        my-thing (e/watch !my-thing)] <...>)
+		
+  You may also site the atom by wrapping in e/server or e/client
+  
+  Usually if you deref an atom, E.g @!my-thing, it means you're doing something wrong!
 
   
 ## Komponentkassen and Designsystemet
