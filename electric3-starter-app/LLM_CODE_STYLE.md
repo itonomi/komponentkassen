@@ -266,6 +266,24 @@ behaviour. They all take two arguments [props Body].
   
   (ks/Button {:data-variant "tertiary"} (dom/text "Click Me")) ; WILL NOT WORK SINCE BODY IS NOT AN ELECTRIC FUNCTION
   
+- To handle events with `ks` components DO NOT try to pass down event
+  handlers props such as :on-change or :on-click. IT WILL NOT WORK.
+  
+  Instead handle the using dom/On
+  
+  For example
+  
+  (println "Input changed to: " (dom/On "change" #(-> % .-target .-value) nil))
+  
+  To handle transactional events such as submitting a form, use this pattern:
+  
+  (let [[t err] (e/Token (dom/On "click" identity nil))]
+    (when t
+      (case (swap! !path conj k) ; replace (swap! ...) with your side effect
+        (t))))
+  
+  
+  
 ### Common Designsystemet Properties
 
 :data-size - can be set to "sm", "md" or "lg"
