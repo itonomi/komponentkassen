@@ -226,10 +226,17 @@ GOOD:
 
 For example:
 
-(dom/props {:class ["my-awesome-class"]
-            :style {:color "red"}})
+(dom/props {:class ["my-awesome-class"]})
 			
 - DO NOT try to use dom/class. THERE IS NO SUCH THING AS dom/class.
+
+- Use hyperfiddle.electric-svg3 (aliased to svg) namespace to do
+  SVG. To create an SVG element do (svg/svg <...>).
+  
+- DO NOT try to use dom/svg. THERE IS NO SUCH THING AS dom/svg.
+
+- DO NOT try to use svg/props. THERE IS NO SUCH THING AS
+  svg/props. Use dom/props inside SVGs, it works.
 
 # Git and Version Control
 
