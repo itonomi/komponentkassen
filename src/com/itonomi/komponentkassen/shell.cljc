@@ -447,7 +447,9 @@
  (e/defn DialogTriggerContext
   [props Body]
   (dom/div (dom/props props)
-           (Body))) 
+           (Body)))
+
+(declare Popover PopoverTrigger PopoverTriggerContext) 
 
  (e/defn Dropdown
   [props Body]
