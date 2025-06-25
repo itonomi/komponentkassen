@@ -155,7 +155,10 @@
            (Body)))
 
 (e/defn Heading
-  "https://storybook.designsystemet.no/?path=/docs/komponenter-typography--docs#heading"
+  "https://storybook.designsystemet.no/?path=/docs/komponenter-typography--docs#heading
+
+NB: setting :level does NOT impact the size of the heading (including
+font size!). To change the size please use :data-size"
   [props Body]
   (let [B (e/fn [] 
             (dom/props (merge-props
