@@ -266,6 +266,14 @@ behaviour. They all take two arguments [props Body].
   
   (ks/Button {:data-variant "tertiary"} (dom/text "Click Me")) ; WILL NOT WORK SINCE BODY IS NOT AN ELECTRIC FUNCTION
   
+### Common Designsystemet Properties
+
+:data-size - can be set to "sm", "md" or "lg"
+
+:data-color - can be set to "accent", "brand1", "brand2", "brand3", "neutral", "danger", "info", "success" or "warning" (varies somewhat between components)
+
+:data-variants - varies greatly from component to component, look up in the Storybook if you're unsure
+
 ### A Complete List of All ks (com.itonomi.komponentkassen.shell) Components
 
 Below is a list of ALL ks components

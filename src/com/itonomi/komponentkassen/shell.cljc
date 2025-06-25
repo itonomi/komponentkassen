@@ -148,6 +148,7 @@
            (Body)))
 
 (e/defn Tabs
+  "https://storybook.designsystemet.no/?path=/docs/komponenter-tabs--docs"
   [props Body]
   (dom/div (dom/props (merge-props
                        {:class ["ds-tabs"]}
@@ -192,6 +193,7 @@ font size!). To change the size please use :data-size"
          (Body)))
 
 (e/defn ListUnordered
+  "https://storybook.designsystemet.no/?path=/docs/komponenter-list--docs"
   [props Body]
   (dom/ul (dom/props (merge-props
                       {:class ["ds-list"]}
@@ -199,6 +201,7 @@ font size!). To change the size please use :data-size"
          (Body))) 
 
  (e/defn ListOrdered
+  "https://storybook.designsystemet.no/?path=/docs/komponenter-list--docs"
   [props Body]
   (dom/ol (dom/props (merge-props
                       {:class ["ds-list"]}
@@ -285,6 +288,7 @@ font size!). To change the size please use :data-size"
           (Body))) 
 
  (e/defn Alert
+  "https://storybook.designsystemet.no/?path=/docs/komponenter-alert--docs"
   [props Body]
   (dom/div (dom/props (merge-props
                        {:class ["ds-alert"]
@@ -293,6 +297,7 @@ font size!). To change the size please use :data-size"
            (Body))) 
 
  (e/defn Avatar
+  "https://storybook.designsystemet.no/?path=/docs/komponenter-avatar--docs"
   [props Body]
   (dom/span (dom/props (merge-props
                         {:class ["ds-avatar"]
@@ -302,6 +307,7 @@ font size!). To change the size please use :data-size"
             (Body))) 
 
  (e/defn Badge
+  "https://storybook.designsystemet.no/?path=/docs/komponenter-badge--docs"
   [props Body]
   (dom/span (dom/props (merge-props
                         {:class ["ds-badge"]
@@ -319,6 +325,7 @@ font size!). To change the size please use :data-size"
             (Body))) 
 
  (e/defn Breadcrumbs
+  "https://storybook.designsystemet.no/?path=/docs/komponenter-breadcrumbs--docs"
   [props Body]
   (dom/nav (dom/props (merge-props
                        {:class ["ds-breadcrumbs"]
@@ -341,6 +348,7 @@ font size!). To change the size please use :data-size"
   (Link props Body)) 
 
  (e/defn Checkbox
+  "https://storybook.designsystemet.no/?path=/docs/komponenter-checkbox--docs"
   [props Body]
   (Field props
          (e/fn []
@@ -351,6 +359,7 @@ font size!). To change the size please use :data-size"
            (Body)))) 
 
  (e/defn ChipButton
+  "https://storybook.designsystemet.no/?path=/docs/komponenter-chip--docs"
   [props Body]
   (dom/button (dom/props (merge-props
                           {:class ["ds-chip"]
@@ -385,6 +394,7 @@ font size!). To change the size please use :data-size"
              (Body))) 
 
  (e/defn Combobox
+  "https://storybook.designsystemet.no/?path=/docs/komponenter-combobox--docs"
   [props Body]
   (dom/div (dom/props (merge-props
                        {:class ["ds-combobox"]}
@@ -418,6 +428,7 @@ font size!). To change the size please use :data-size"
            (Body))) 
 
  (e/defn Dialog
+  "https://storybook.designsystemet.no/?path=/docs/komponenter-dialog--docs"
   [props Body]
   (dom/dialog (dom/props (merge-props
                           {:class ["ds-dialog"]
@@ -444,6 +455,7 @@ font size!). To change the size please use :data-size"
 (declare Popover PopoverTrigger PopoverTriggerContext) 
 
  (e/defn Dropdown
+  "https://storybook.designsystemet.no/?path=/docs/komponenter-dropdown--docs"
   [props Body]
    (Popover (merge-props {:class ["ds-dropdown"]
                          :data-placement "bottom-end"}
@@ -477,6 +489,7 @@ font size!). To change the size please use :data-size"
   (PopoverTriggerContext props Body)) 
 
  (e/defn ErrorSummary
+  "https://storybook.designsystemet.no/?path=/docs/komponenter-error-summary--docs"
   [props Body]
   (dom/div (dom/props (merge-props
                        {:class ["ds-error-summary"]
@@ -501,6 +514,7 @@ font size!). To change the size please use :data-size"
   (Link (merge-props {:data-color "neutral"} props) Body)) 
 
  (e/defn Fieldset
+  "https://storybook.designsystemet.no/?path=/docs/komponenter-fieldset--docs"
   [props Body]
   (dom/fieldset (dom/props (merge-props
                             {:class "ds-fieldset"}
@@ -517,6 +531,7 @@ font size!). To change the size please use :data-size"
   (Paragraph props Body)) 
 
  (e/defn Input
+  "https://storybook.designsystemet.no/?path=/docs/komponenter-textfield--docs"
   [props Body]
   (dom/input (dom/props (merge-props
                          {:class ["ds-input"]
@@ -524,6 +539,7 @@ font size!). To change the size please use :data-size"
                          props))))
 
  (e/defn Pagination
+  "https://storybook.designsystemet.no/?path=/docs/komponenter-pagination--docs"
   [props Body]
   (dom/nav (dom/props (merge-props
                        {:class ["ds-pagination"]
@@ -546,6 +562,7 @@ font size!). To change the size please use :data-size"
   (Button props Body)) 
 
  (e/defn Radio
+  "https://storybook.designsystemet.no/?path=/docs/komponenter-radio--docs"
   [props Body]
   (Field props
          (e/fn []
@@ -556,6 +573,7 @@ font size!). To change the size please use :data-size"
            (Body)))) 
 
  (e/defn Search
+  "https://storybook.designsystemet.no/?path=/docs/komponenter-search--docs"
   [props Body]
   (dom/div (dom/props (merge-props
                        {:class ["ds-search"]}
@@ -588,6 +606,7 @@ font size!). To change the size please use :data-size"
           Body)) 
 
  (e/defn Switch
+  "https://storybook.designsystemet.no/?path=/docs/komponenter-switch--docs"
   [props Body]
   (Field props
          (e/fn []
@@ -599,6 +618,7 @@ font size!). To change the size please use :data-size"
            (Body)))) 
 
  (e/defn Tag
+  "https://storybook.designsystemet.no/?path=/docs/komponenter-tag--docs"
   [props Body]
   (dom/span (dom/props (merge-props
                         {:class ["ds-tag"]}
@@ -606,6 +626,7 @@ font size!). To change the size please use :data-size"
             (Body))) 
 
  (e/defn ToggleGroup
+  "https://storybook.designsystemet.no/?path=/docs/komponenter-toggle-group--docs"
   [props Body]
   (dom/div (dom/props (merge-props
                        {:class ["ds-togglegroup"]
@@ -618,6 +639,7 @@ font size!). To change the size please use :data-size"
   (Button (merge-props {:data-variant "tertiary"} props) Body)) 
 
  (e/defn Tooltip
+  "https://storybook.designsystemet.no/?path=/docs/komponenter-tooltip--docs"
   [props Body]
   (dom/span (dom/props (merge-props
                         {:class ["ds-tooltip"]
@@ -635,6 +657,7 @@ font size!). To change the size please use :data-size"
          (Body))) 
 
  (e/defn Popover
+  "https://storybook.designsystemet.no/?path=/docs/komponenter-popover--docs"
   [props Body]
   (dom/div (dom/props (merge-props
                        {:class ["ds-popover"]
@@ -653,6 +676,7 @@ font size!). To change the size please use :data-size"
            (Body))) 
 
  (e/defn Skeleton
+  "https://storybook.designsystemet.no/?path=/docs/komponenter-loaders-skeleton--docs"
   [props Body]
   (dom/span (dom/props (merge-props
                         {:class ["ds-skeleton"]
