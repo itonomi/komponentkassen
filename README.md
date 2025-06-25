@@ -52,7 +52,7 @@ NB: this removes `resources/public/`!!!!!
 !!!!!!!!!!!!
 
 ```
-VERSION='1.0.5' npm install "@digdir/designsystemet@$VERSION" "@digdir/designsystemet-css@$VERSION" "@digdir/designsystemet-theme@$VERSION"
+VERSION='1.1.0' npm install "@digdir/designsystemet@$VERSION" "@digdir/designsystemet-css@$VERSION" "@digdir/designsystemet-theme@$VERSION"
 
 npx @digdir/designsystemet tokens create \
 --main-colors "primary:#0062BA" "accent:#1E98F5" \
