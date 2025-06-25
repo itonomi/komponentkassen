@@ -19,44 +19,33 @@
             [hyperfiddle.electric-dom3 :as dom]
             [hyperfiddle.electric-svg3 :as svg]))
 
+;; It might be good to allow for using props such as :variant
+;; and :size, instead of :data-variant and :data-size, but it may
+;; actually be better to just leave it them.
+;;
+;; (defn maybe-add-data-prefix [prop]
+;;   (case prop
+;;     :size ))
+;;
+;; The more I think about it, I lean towards leaving in the data-
+;; prefix. It essentially communicates "this is set directly in the
+;; DOM, there's no magic translation layer", which is a good think. I
+;; think.
+
 (defn- merge-prop-pair [left right]
-  (if (or (map? left) (map? right))
+    (if (or (map? left) (map? right))
     (merge left right) ; We intenionally fail when only one value is a map
     right))
 (defn- merge-props [left right]
   (merge-with merge-prop-pair left right))
-
-(e/defn Spinner
-  "https://storybook.designsystemet.no/?path=/docs/komponenter-loaders-spinner"
-  [props]
-  (svg/svg (dom/props (merge-props {:class       "ds-spinner"
-                                    :role        "img"
-                                    :viewBox     "0 0 50 50"
-                                    :aria-hidden "true"
-                                    :data-size   "sm"}
-                                   props))
-
-           (svg/circle (dom/props {:class        "ds-spinner__background"
-                                   :cx           25
-                                   :cy           25
-                                   :r            20
-                                   :fill         "none"
-                                   :stroke-width 5}))
-
-           (svg/circle (dom/props {:class        "ds-spinner__circle"
-                                   :cx           25
-                                   :cy           25
-                                   :r            20
-                                   :fill         "none"
-                                   :stroke-width 5}))))
 
 (e/defn Button
   "https://next.storybook.designsystemet.no/?path=/docs/komponenter-button"
   ([props Body]
    (dom/button
      (dom/props (merge-props
-                 {:class "ds-button"
-                  :variant "primary"
+                 {:class ["ds-button"]
+                  :data-variant "primary"
                   :type "button"}
                  props))
      ;; NB: it's crucial that we return the result of Body!
@@ -65,7 +54,7 @@
 (e/defn Link
   "https://next.storybook.designsystemet.no/?path=/docs/komponenter-link"
   [props Body]
-  (dom/a (dom/props (merge-props {:class "ds-link"}
+  (dom/a (dom/props (merge-props {:class ["ds-link"]}
                                  props))
          (Body)))
 
@@ -73,7 +62,7 @@
   "https://storybook.designsystemet.no/?path=/docs/komponenter-textarea"
   [props Body]
   (dom/textarea (dom/props (merge-props
-                            {:class "ds-input"}
+                            {:class ["ds-input"]}
                             props))
                 (Body)))
 
@@ -94,14 +83,14 @@
  (e/defn FieldAffixes
   [props Body]
   (dom/div (dom/props (merge-props
-                       {:class "ds-field-affixes"}
+                       {:class ["ds-field-affixes"]}
                        props))
            (Body))) 
 
  (e/defn FieldAffix
   [props Body]
   (dom/span (dom/props (merge-props
-                        {:class "ds-field-affix"
+                        {:class ["ds-field-affix"]
                          :aria-hidden "true"}
                         props))
             (Body))) 
@@ -209,7 +198,7 @@
  (e/defn ListOrdered
   [props Body]
   (dom/ol (dom/props (merge-props
-                      {:class "ds-list"}
+                      {:class ["ds-list"]}
                       props))
           (Body)))
 
@@ -248,7 +237,7 @@
  (e/defn CardBlock
   [props Body]
   (dom/div (dom/props (merge-props
-                       {:class "ds-card__block"}
+                       {:class ["ds-card__block"]}
                        props))
            (Body)))
 
@@ -295,7 +284,7 @@
  (e/defn Alert
   [props Body]
   (dom/div (dom/props (merge-props
-                       {:class "ds-alert"
+                       {:class ["ds-alert"]
                         :data-color "info"}
                        props))
            (Body))) 
@@ -303,7 +292,7 @@
  (e/defn Avatar
   [props Body]
   (dom/span (dom/props (merge-props
-                        {:class "ds-avatar"
+                        {:class ["ds-avatar"]
                          :data-variant "circle"
                          :role "img"}
                         props))
@@ -312,7 +301,7 @@
  (e/defn Badge
   [props Body]
   (dom/span (dom/props (merge-props
-                        {:class "ds-badge"
+                        {:class ["ds-badge"]
                          :data-variant "base"}
                         props))
             (Body))) 
@@ -320,7 +309,7 @@
  (e/defn BadgePosition
   [props Body]
   (dom/span (dom/props (merge-props
-                        {:class "ds-badge--position"
+                        {:class ["ds-badge--position"]
                          :data-overlap "rectangle"
                          :data-placement "top-right"}
                         props))
@@ -329,7 +318,7 @@
  (e/defn Breadcrumbs
   [props Body]
   (dom/nav (dom/props (merge-props
-                       {:class "ds-breadcrumbs"
+                       {:class ["ds-breadcrumbs"]
                         :aria-label "Du er her:"}
                        props))
            (Body))) 
@@ -354,14 +343,14 @@
          (e/fn []
            (dom/input (dom/props (merge-props
                                   {:type "checkbox"
-                                   :class "ds-input"}
+                                   :class ["ds-input"]}
                                   props)))
            (Body)))) 
 
  (e/defn ChipButton
   [props Body]
   (dom/button (dom/props (merge-props
-                          {:class "ds-chip"
+                          {:class ["ds-chip"]
                            :type "button"}
                           props))
               (Body))) 
@@ -373,62 +362,62 @@
  (e/defn ChipCheckbox
   [props Body]
   (dom/label (dom/props (merge-props
-                         {:class "ds-chip"}
+                         {:class ["ds-chip"]}
                          props))
              (dom/input (dom/props (merge-props
                                     {:type "checkbox"
-                                     :class "ds-input"}
+                                     :class ["ds-input"]}
                                     props)))
              (Body))) 
 
  (e/defn ChipRadio
   [props Body]
   (dom/label (dom/props (merge-props
-                         {:class "ds-chip"}
+                         {:class ["ds-chip"]}
                          props))
              (dom/input (dom/props (merge-props
                                     {:type "radio"
-                                     :class "ds-input"}
+                                     :class ["ds-input"]}
                                     props)))
              (Body))) 
 
  (e/defn Combobox
   [props Body]
   (dom/div (dom/props (merge-props
-                       {:class "ds-combobox"}
+                       {:class ["ds-combobox"]}
                        props))
            (Body))) 
 
  (e/defn ComboboxOption
   [props Body]
   (dom/button (dom/props (merge-props
-                          {:class "ds-combobox__option"
+                          {:class ["ds-combobox__option"]
                            :role "option"
                            :type "button"
-                           :tabIndex -1}
+                           :tabindex -1}
                           props))
               (Body))) 
 
  (e/defn ComboboxCustom
   [props Body]
   (dom/div (dom/props (merge-props
-                       {:class "ds-combobox__custom"
+                       {:class ["ds-combobox__custom"]
                         :role "option"
-                        :tabIndex -1}
+                        :tabindex -1}
                        props))
            (Body))) 
 
  (e/defn ComboboxEmpty
   [props Body]
   (dom/div (dom/props (merge-props
-                       {:class "ds-combobox__empty"}
+                       {:class ["ds-combobox__empty"]}
                        props))
            (Body))) 
 
  (e/defn Dialog
   [props Body]
   (dom/dialog (dom/props (merge-props
-                          {:class "ds-dialog"
+                          {:class ["ds-dialog"]
                            :data-modal true}
                           props))
               (Body))) 
@@ -436,7 +425,7 @@
  (e/defn DialogBlock
   [props Body]
   (dom/div (dom/props (merge-props
-                       {:class "ds-dialog__block"}
+                       {:class ["ds-dialog__block"]}
                        props))
            (Body))) 
 
@@ -453,14 +442,14 @@
 
  (e/defn Dropdown
   [props Body]
-  (Popover (merge-props {:class "ds-dropdown"
-                         :placement "bottom-end"}
+   (Popover (merge-props {:class ["ds-dropdown"]
+                         :data-placement "bottom-end"}
                         props)
            Body)) 
 
  (e/defn DropdownButton
   [props Body]
-  (Button (merge-props {:variant "tertiary"} props) Body)) 
+  (Button (merge-props {:data-variant "tertiary"} props) Body)) 
 
  (e/defn DropdownHeading
   [props Body]
@@ -487,8 +476,8 @@
  (e/defn ErrorSummary
   [props Body]
   (dom/div (dom/props (merge-props
-                       {:class "ds-error-summary"
-                        :tabIndex -1}
+                       {:class ["ds-error-summary"]
+                        :tabindex -1}
                        props))
            (Body))) 
 
@@ -527,14 +516,14 @@
  (e/defn Input
   [props Body]
   (dom/input (dom/props (merge-props
-                         {:class "ds-input"
+                         {:class ["ds-input"]
                           :type "text"}
-                         props)))) 
+                         props))))
 
  (e/defn Pagination
   [props Body]
   (dom/nav (dom/props (merge-props
-                       {:class "ds-pagination"
+                       {:class ["ds-pagination"]
                         :aria-label "Sidenavigering"}
                        props))
            (Body))) 
@@ -559,14 +548,14 @@
          (e/fn []
            (dom/input (dom/props (merge-props
                                   {:type "radio"
-                                   :class "ds-input"}
+                                   :class ["ds-input"]}
                                   props)))
            (Body)))) 
 
  (e/defn Search
   [props Body]
   (dom/div (dom/props (merge-props
-                       {:class "ds-search"}
+                       {:class ["ds-search"]}
                        props))
            (Body))) 
 
@@ -574,7 +563,7 @@
   [props Body]
   (dom/input (dom/props (merge-props
                          {:type "search"
-                          :class "ds-input"
+                          :class ["ds-input"]
                           :placeholder ""}
                          props)))) 
 
@@ -588,7 +577,7 @@
 
  (e/defn SearchClear
   [props Body]
-  (Button (merge-props {:variant "tertiary"
+  (Button (merge-props {:data-variant "tertiary"
                         :type "reset"
                         :aria-label "Tøm"
                         :icon true}
@@ -602,33 +591,33 @@
            (dom/input (dom/props (merge-props
                                   {:type "checkbox"
                                    :role "switch"
-                                   :class "ds-input"}
+                                   :class ["ds-input"]}
                                   props)))
            (Body)))) 
 
  (e/defn Tag
   [props Body]
   (dom/span (dom/props (merge-props
-                        {:class "ds-tag"}
+                        {:class ["ds-tag"]}
                         props))
             (Body))) 
 
  (e/defn ToggleGroup
   [props Body]
   (dom/div (dom/props (merge-props
-                       {:class "ds-togglegroup"
+                       {:class ["ds-togglegroup"]
                         :role "radiogroup"}
                        props))
            (Body))) 
 
  (e/defn ToggleGroupItem
   [props Body]
-  (Button (merge-props {:variant "tertiary"} props) Body)) 
+  (Button (merge-props {:data-variant "tertiary"} props) Body)) 
 
  (e/defn Tooltip
   [props Body]
   (dom/span (dom/props (merge-props
-                        {:class "ds-tooltip"
+                        {:class ["ds-tooltip"]
                          :role "tooltip"
                          :popover "manual"}
                         props))
@@ -637,7 +626,7 @@
  (e/defn ValidationMessage
   [props Body]
   (dom/p (dom/props (merge-props
-                     {:class "ds-validation-message"
+                     {:class ["ds-validation-message"]
                       :data-field "validation"}
                      props))
          (Body))) 
@@ -645,7 +634,7 @@
  (e/defn Popover
   [props Body]
   (dom/div (dom/props (merge-props
-                       {:class "ds-popover"
+                       {:class ["ds-popover"]
                         :popover "manual"
                         :data-variant "default"}
                        props))
@@ -663,7 +652,7 @@
  (e/defn Skeleton
   [props Body]
   (dom/span (dom/props (merge-props
-                        {:class "ds-skeleton"
+                        {:class ["ds-skeleton"]
                          :aria-hidden "true"
                          :data-variant "rectangle"}
                         props))
