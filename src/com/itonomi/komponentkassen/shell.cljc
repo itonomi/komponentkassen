@@ -93,7 +93,29 @@
   (dom/div (dom/props (merge-props
                        {:data-field "description"}
                        props))
-           (Body)))
+           (Body))) 
+
+ (e/defn FieldAffixes
+  [props Body]
+  (dom/div (dom/props (merge-props
+                       {:class "ds-field-affixes"}
+                       props))
+           (Body))) 
+
+ (e/defn FieldAffix
+  [props Body]
+  (dom/span (dom/props (merge-props
+                        {:class "ds-field-affix"
+                         :aria-hidden "true"}
+                        props))
+            (Body))) 
+
+ (e/defn FieldCounter
+  [props Body]
+  (dom/p (dom/props (merge-props
+                     {:data-field "validation"}
+                     props))
+         (Body)))
 
 (e/defn Label
   "https://storybook.designsystemet.no/?path=/docs/komponenter-typography--docs#label"
@@ -186,7 +208,14 @@
   (dom/ul (dom/props (merge-props
                       {:class ["ds-list"]}
                       props))
-         (Body)))
+         (Body))) 
+
+ (e/defn ListOrdered
+  [props Body]
+  (dom/ol (dom/props (merge-props
+                      {:class "ds-list"}
+                      props))
+          (Body)))
 
 (e/defn ListItem
   [props Body]
@@ -217,6 +246,13 @@
   [props Body]
   (dom/div (dom/props (merge-props
                        {:class ["ds-card"]}
+                       props))
+           (Body))) 
+
+ (e/defn CardBlock
+  [props Body]
+  (dom/div (dom/props (merge-props
+                       {:class "ds-card__block"}
                        props))
            (Body)))
 
@@ -260,15 +296,381 @@
 (e/defn TableHeaderCell
   [props Body]
   (dom/th (dom/props props)
-          (Body)))
+          (Body))) 
 
+ (e/defn Alert
+  [props Body]
+  (dom/div (dom/props (merge-props
+                       {:class "ds-alert"
+                        :data-color "info"}
+                       props))
+           (Body))) 
 
+ (e/defn Avatar
+  [props Body]
+  (dom/span (dom/props (merge-props
+                        {:class "ds-avatar"
+                         :data-variant "circle"
+                         :role "img"}
+                        props))
+            (Body))) 
 
-;; TODO: have a macro here which reads in the ns and generates convenience macros for all the components.
-;;       BAD: (TabsTab {} (e/fn [] (dom/text "Documents")))
-;;       ->
-;;       LESSBAD: (tabsTab (dom/text "Documents"))
+ (e/defn Badge
+  [props Body]
+  (dom/span (dom/props (merge-props
+                        {:class "ds-badge"
+                         :data-variant "base"}
+                        props))
+            (Body))) 
 
-(defmacro dom-u-tags [& body] (dom/element* :u-tags body))
-(defmacro dom-u-datalist [& body] (dom/element* :u-datalist body))
-(defmacro dom-u-option [& body] (dom/element* :u-option body))
+ (e/defn BadgePosition
+  [props Body]
+  (dom/span (dom/props (merge-props
+                        {:class "ds-badge--position"
+                         :data-overlap "rectangle"
+                         :data-placement "top-right"}
+                        props))
+            (Body))) 
+
+ (e/defn Breadcrumbs
+  [props Body]
+  (dom/nav (dom/props (merge-props
+                       {:class "ds-breadcrumbs"
+                        :aria-label "Du er her:"}
+                       props))
+           (Body))) 
+
+ (e/defn BreadcrumbsList
+  [props Body]
+  (dom/ol (dom/props props)
+          (Body))) 
+
+ (e/defn BreadcrumbsItem
+  [props Body]
+  (dom/li (dom/props props)
+          (Body))) 
+
+ (e/defn BreadcrumbsLink
+  [props Body]
+  (Link props Body)) 
+
+ (e/defn Checkbox
+  [props Body]
+  (Field props
+         (e/fn []
+           (dom/input (dom/props (merge-props
+                                  {:type "checkbox"
+                                   :class "ds-input"}
+                                  props)))
+           (Body)))) 
+
+ (e/defn ChipButton
+  [props Body]
+  (dom/button (dom/props (merge-props
+                          {:class "ds-chip"
+                           :type "button"}
+                          props))
+              (Body))) 
+
+ (e/defn ChipRemovable
+  [props Body]
+  (ChipButton (merge-props {:data-removable true} props) Body)) 
+
+ (e/defn ChipCheckbox
+  [props Body]
+  (dom/label (dom/props (merge-props
+                         {:class "ds-chip"}
+                         props))
+             (dom/input (dom/props (merge-props
+                                    {:type "checkbox"
+                                     :class "ds-input"}
+                                    props)))
+             (Body))) 
+
+ (e/defn ChipRadio
+  [props Body]
+  (dom/label (dom/props (merge-props
+                         {:class "ds-chip"}
+                         props))
+             (dom/input (dom/props (merge-props
+                                    {:type "radio"
+                                     :class "ds-input"}
+                                    props)))
+             (Body))) 
+
+ (e/defn Combobox
+  [props Body]
+  (dom/div (dom/props (merge-props
+                       {:class "ds-combobox"}
+                       props))
+           (Body))) 
+
+ (e/defn ComboboxOption
+  [props Body]
+  (dom/button (dom/props (merge-props
+                          {:class "ds-combobox__option"
+                           :role "option"
+                           :type "button"
+                           :tabIndex -1}
+                          props))
+              (Body))) 
+
+ (e/defn ComboboxCustom
+  [props Body]
+  (dom/div (dom/props (merge-props
+                       {:class "ds-combobox__custom"
+                        :role "option"
+                        :tabIndex -1}
+                       props))
+           (Body))) 
+
+ (e/defn ComboboxEmpty
+  [props Body]
+  (dom/div (dom/props (merge-props
+                       {:class "ds-combobox__empty"}
+                       props))
+           (Body))) 
+
+ (e/defn Dialog
+  [props Body]
+  (dom/dialog (dom/props (merge-props
+                          {:class "ds-dialog"
+                           :data-modal true}
+                          props))
+              (Body))) 
+
+ (e/defn DialogBlock
+  [props Body]
+  (dom/div (dom/props (merge-props
+                       {:class "ds-dialog__block"}
+                       props))
+           (Body))) 
+
+ (e/defn DialogTrigger
+  [props Body]
+  (Button (merge-props {:aria-haspopup "dialog"} props) Body)) 
+
+ (e/defn DialogTriggerContext
+  [props Body]
+  (dom/div (dom/props props)
+           (Body))) 
+
+ (e/defn Dropdown
+  [props Body]
+  (dom/div (dom/props (merge-props
+                       {:class "ds-dropdown"
+                        :placement "bottom-end"}
+                       props))
+           (Body))) 
+
+ (e/defn DropdownButton
+  [props Body]
+  (Button (merge-props {:variant "tertiary"} props) Body)) 
+
+ (e/defn DropdownHeading
+  [props Body]
+  (Heading props Body)) 
+
+ (e/defn DropdownItem
+  [props Body]
+  (dom/li (dom/props props)
+          (Body))) 
+
+ (e/defn DropdownList
+  [props Body]
+  (dom/ul (dom/props props)
+          (Body))) 
+
+ (e/defn DropdownTrigger
+  [props Body]
+  (Button props Body)) 
+
+ (e/defn DropdownTriggerContext
+  [props Body]
+  (dom/div (dom/props props)
+           (Body))) 
+
+ (e/defn ErrorSummary
+  [props Body]
+  (dom/div (dom/props (merge-props
+                       {:class "ds-error-summary"
+                        :tabIndex -1}
+                       props))
+           (Body))) 
+
+ (e/defn ErrorSummaryHeading
+  [props Body]
+  (Heading props Body)) 
+
+ (e/defn ErrorSummaryList
+  [props Body]
+  (ListUnordered props Body)) 
+
+ (e/defn ErrorSummaryItem
+  [props Body]
+  (ListItem props Body)) 
+
+ (e/defn ErrorSummaryLink
+  [props Body]
+  (Link (merge-props {:data-color "neutral"} props) Body)) 
+
+ (e/defn Fieldset
+  [props Body]
+  (dom/fieldset (dom/props (merge-props
+                            {:class "ds-fieldset"}
+                            props))
+                (Body))) 
+
+ (e/defn FieldsetLegend
+  [props Body]
+  (dom/legend (dom/props props)
+              (Body))) 
+
+ (e/defn FieldsetDescription
+  [props Body]
+  (Paragraph props Body)) 
+
+ (e/defn Input
+  [props Body]
+  (dom/input (dom/props (merge-props
+                         {:class "ds-input"
+                          :type "text"}
+                         props)))) 
+
+ (e/defn Pagination
+  [props Body]
+  (dom/nav (dom/props (merge-props
+                       {:class "ds-pagination"
+                        :aria-label "Sidenavigering"}
+                       props))
+           (Body))) 
+
+ (e/defn PaginationList
+  [props Body]
+  (dom/ul (dom/props props)
+          (Body))) 
+
+ (e/defn PaginationItem
+  [props Body]
+  (dom/li (dom/props props)
+          (Body))) 
+
+ (e/defn PaginationButton
+  [props Body]
+  (Button props Body)) 
+
+ (e/defn Radio
+  [props Body]
+  (Field props
+         (e/fn []
+           (dom/input (dom/props (merge-props
+                                  {:type "radio"
+                                   :class "ds-input"}
+                                  props)))
+           (Body)))) 
+
+ (e/defn Search
+  [props Body]
+  (dom/div (dom/props (merge-props
+                       {:class "ds-search"}
+                       props))
+           (Body))) 
+
+ (e/defn SearchInput
+  [props Body]
+  (dom/input (dom/props (merge-props
+                         {:type "search"
+                          :class "ds-input"
+                          :placeholder ""}
+                         props)))) 
+
+ (e/defn SearchButton
+  [props Body]
+  (Button (merge-props {:type "submit"} props) 
+          (e/fn [] 
+            (if (Body)
+              (Body)
+              (dom/text "Søk"))))) 
+
+ (e/defn SearchClear
+  [props Body]
+  (Button (merge-props {:variant "tertiary"
+                        :type "reset"
+                        :aria-label "Tøm"
+                        :icon true}
+                       props)
+          Body)) 
+
+ (e/defn Switch
+  [props Body]
+  (Field props
+         (e/fn []
+           (dom/input (dom/props (merge-props
+                                  {:type "checkbox"
+                                   :role "switch"
+                                   :class "ds-input"}
+                                  props)))
+           (Body)))) 
+
+ (e/defn Tag
+  [props Body]
+  (dom/span (dom/props (merge-props
+                        {:class "ds-tag"}
+                        props))
+            (Body))) 
+
+ (e/defn ToggleGroup
+  [props Body]
+  (dom/div (dom/props (merge-props
+                       {:class "ds-togglegroup"
+                        :role "radiogroup"}
+                       props))
+           (Body))) 
+
+ (e/defn ToggleGroupItem
+  [props Body]
+  (Button (merge-props {:variant "tertiary"} props) Body)) 
+
+ (e/defn Tooltip
+  [props Body]
+  (dom/span (dom/props (merge-props
+                        {:class "ds-tooltip"
+                         :role "tooltip"
+                         :popover "manual"}
+                        props))
+            (Body))) 
+
+ (e/defn ValidationMessage
+  [props Body]
+  (dom/p (dom/props (merge-props
+                     {:class "ds-validation-message"
+                      :data-field "validation"}
+                     props))
+         (Body))) 
+
+ (e/defn Popover
+  [props Body]
+  (dom/div (dom/props (merge-props
+                       {:class "ds-popover"
+                        :popover "manual"
+                        :data-variant "default"}
+                       props))
+           (Body))) 
+
+ (e/defn PopoverTrigger
+  [props Body]
+  (Button props Body)) 
+
+ (e/defn PopoverTriggerContext
+  [props Body]
+  (dom/div (dom/props props)
+           (Body))) 
+
+ (e/defn Skeleton
+  [props Body]
+  (dom/span (dom/props (merge-props
+                        {:class "ds-skeleton"
+                         :aria-hidden "true"
+                         :data-variant "rectangle"}
+                        props))
+            (Body)))
