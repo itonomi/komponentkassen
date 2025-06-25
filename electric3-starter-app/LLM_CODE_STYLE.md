@@ -331,7 +331,7 @@ TableCell, TableHeaderCell
 
 Feedback Components:
 
-Alert
+Alert (Note that the Alert component takes :data-color not :data-variant to specify danger, info, success or warning!)
 Badge, BadgePosition
 ErrorSummary, ErrorSummaryHeading, ErrorSummaryList, ErrorSummaryItem, ErrorSummaryLink
 Tooltip
