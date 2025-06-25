@@ -238,6 +238,43 @@ For example:
 - DO NOT try to use svg/props. THERE IS NO SUCH THING AS
   svg/props. Use dom/props inside SVGs, it works.
   
+- Unless you SPECIFICALLY know an Electric function takes event
+  handlers / callbaks, DO NOT try to pass down event handlers props
+  such as :on-change or :on-click. IT WILL NOT WORK!!!
+  
+  ABSOLUTELY NO ELECTRIC FUNCTIONS IN
+  com.itonomi.komponentkassen.shell OR
+  com.itonomi.komponentkassen.hyperfiddle.electric-forms5 TAKE CALLBACKS
+  
+- In general the way to handle events is by using dom/On
+  
+  For example
+  
+  (println "Input changed to: " (dom/On "change" #(-> % .-target .-value) nil)) ; print the new value every time it chages
+  
+  To handle transactional events such as submitting a form, use this pattern:
+  
+  (let [[t err] (e/Token (dom/On "click" identity nil))]
+    (when t
+      (case (swap! !path conj k) ; replace (swap! ...) with your side effect
+        (t))))
+		
+  Remember that events propagate. Therefore you can typically choose
+  whether to handle a given event in a child component or parent
+  component.
+  
+- e/server and e/client ONLY works in Electric code. IT DOES NOT WORK
+  INSIDE REGULAR CLOJURE FUNCTIONS.
+  
+  BAD:
+  
+  (fn [] (e/server (transact-todo todo)))
+  
+  GOOD:
+  
+  (e/server (transact-todo todo))
+
+  
 ## Komponentkassen and Designsystemet
 
 We are using the Komponentkassen Electric Clojure 3 component system
@@ -266,21 +303,6 @@ behaviour. They all take two arguments [props Body].
   
   (ks/Button {:data-variant "tertiary"} (dom/text "Click Me")) ; WILL NOT WORK SINCE BODY IS NOT AN ELECTRIC FUNCTION
   
-- To handle events with `ks` components DO NOT try to pass down event
-  handlers props such as :on-change or :on-click. IT WILL NOT WORK.
-  
-  Instead handle the using dom/On
-  
-  For example
-  
-  (println "Input changed to: " (dom/On "change" #(-> % .-target .-value) nil))
-  
-  To handle transactional events such as submitting a form, use this pattern:
-  
-  (let [[t err] (e/Token (dom/On "click" identity nil))]
-    (when t
-      (case (swap! !path conj k) ; replace (swap! ...) with your side effect
-        (t))))
   
   
   
