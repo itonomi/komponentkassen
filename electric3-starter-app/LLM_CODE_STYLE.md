@@ -237,6 +237,34 @@ For example:
 
 - DO NOT try to use svg/props. THERE IS NO SUCH THING AS
   svg/props. Use dom/props inside SVGs, it works.
+  
+## Komponentkassen and Designsystemet
+
+We are using the Komponentkassen Electric Clojure 3 component system
+which is built on Designsystemet(https://storybook.designsystemet.no)
+
+Please use the com.itonomi.komponentkassen.shell namespace aliased as
+`ks` to develop UI.
+
+The components in `ks` are all pure components with no state or
+behaviour. They all take two arguments [props Body].
+
+- props is a map of DOM properties. Please use properties such as
+  :data-variant, :data-color and :data-size to use styling from
+  Designsystemet. If you wish to add extra styling please use a :style
+  property with a map of CSS directives. E.g :style {:color "green"}.
+  
+- Body is an Electric function which renders the body of the component
+
+  For example:
+  
+  (ks/Button {:data-variant "tertiary"} (e/fn [] (dom/text "Click Me")))
+  
+  Body MUST be an Electric function!!
+  
+  BROKEN EXAMPLE:
+  
+  (ks/Button {:data-variant "tertiary"} (dom/text "Click Me")) ; WILL NOT WORK SINCE BODY IS NOT AN ELECTRIC FUNCTION
 
 # Git and Version Control
 
