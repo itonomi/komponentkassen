@@ -13,8 +13,6 @@
 ;; Storybook.
 ;;
 
-
-
 (ns com.itonomi.komponentkassen.shell
   {:clj-kondo/ignore true}
   (:require [hyperfiddle.electric3 :as e]
@@ -71,7 +69,6 @@
   (dom/a (dom/props (merge-props {:class "ds-link"}
                                  props))
          (Body)))
-
 
 (e/defn Textarea
   "https://storybook.designsystemet.no/?path=/docs/komponenter-textarea"
@@ -276,8 +273,6 @@
   (dom/tbody (dom/props props)
              (Body)))
 
-
-
 (e/defn TableFoot
   [props Body]
   (dom-tfoot (dom/props props)
@@ -457,11 +452,10 @@
 
  (e/defn Dropdown
   [props Body]
-  (dom/div (dom/props (merge-props
-                       {:class "ds-dropdown"
-                        :placement "bottom-end"}
-                       props))
-           (Body))) 
+  (Popover (merge-props {:class "ds-dropdown"
+                         :placement "bottom-end"}
+                        props)
+           Body)) 
 
  (e/defn DropdownButton
   [props Body]
@@ -483,12 +477,11 @@
 
  (e/defn DropdownTrigger
   [props Body]
-  (Button props Body)) 
+  (PopoverTrigger props Body)) 
 
  (e/defn DropdownTriggerContext
   [props Body]
-  (dom/div (dom/props props)
-           (Body))) 
+  (PopoverTriggerContext props Body)) 
 
  (e/defn ErrorSummary
   [props Body]
