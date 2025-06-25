@@ -17,8 +17,7 @@
   {:clj-kondo/ignore true}
   (:require [hyperfiddle.electric3 :as e]
             [hyperfiddle.electric-dom3 :as dom]
-            [hyperfiddle.electric-svg3 :as svg]
-            [com.itonomi.komponentkassen.icon :as kk.icon]))
+            [hyperfiddle.electric-svg3 :as svg]))
 
 (defn- merge-prop-pair [left right]
   (if (or (map? left) (map? right))

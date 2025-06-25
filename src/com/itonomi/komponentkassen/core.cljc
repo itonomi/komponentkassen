@@ -13,7 +13,6 @@
             [hyperfiddle.electric-dom3 :as dom]
             [hyperfiddle.electric-svg3 :as svg]
             [lambdaisland.deep-diff2 :as ddiff]
-            [com.itonomi.komponentkassen.icon :as kk.icon]
             [clojure.core.match :refer [match]]
             [clojure.string :as str]
             [hyperfiddle.rcf :refer [tests tap %]])
@@ -444,7 +443,7 @@
 
         (dom/div
           (dom/props {:class "ds-combobox__arrow"})
-          (kk.icon/Arrow {:direction (if open? :down :up)})))
+          #_(kk.icon/Arrow {:direction (if open? :down :up)})))
 
       (dom/div
         (dom/props {:class "ds-combobox__error-message"
