@@ -2,55 +2,49 @@
   (:require [hyperfiddle.electric3 :as e]
             [hyperfiddle.electric-dom3 :as dom]
             [com.itonomi.oscilloscope :as oscilloscope]
-            [com.itonomi.komponentkassen.shell :as ks]))
+            [com.itonomi.komponentkassen.shell2 :as ks2 :include-macros true]))
 
 ;; Example components to showcase in the gallery
 (e/defn ButtonExample [params]
-  (ks/Button {:data-variant (:variant params "primary")
-              :data-size (:size params "md")
-              :disabled (:disabled params false)}
-             (e/fn []
-               (dom/text (:text params "Click me"))
-               (let [[t _] (e/Token (dom/On "click" identity nil))]
-                 (when t
-                   (when-not (:disabled params)
-                     (js/alert (str "Button clicked! Variant: " (:variant params))))
-                   (t))))))
+  (ks2/button {:data-variant (:variant params "primary")
+               :data-size (:size params "md")
+               :disabled (:disabled params false)}
+    (dom/text (:text params "Click me"))
+    (let [[t _] (e/Token (dom/On "click" identity nil))]
+      (when t
+        (when-not (:disabled params)
+          (js/alert (str "Button clicked! Variant: " (:variant params))))
+        (t)))))
 
 (e/defn CardExample [params]
-  (ks/Card {}
-           (e/fn []
-             (ks/CardBlock {}
-                           (e/fn []
-                             (ks/Heading {:level 3}
-                                         (e/fn [] (dom/text "Example Card")))
-                             (ks/Paragraph {}
-                                           (e/fn [] (dom/text "This is a card component from Komponentkassen."))))))))
+  (ks2/card
+    (ks2/card-block
+      (ks2/heading {:level 3}
+        (dom/text "Example Card"))
+      (ks2/paragraph
+        (dom/text "This is a card component from Komponentkassen.")))))
 
 (e/defn InputExample [params]
   (let [!value (atom "")
         value (e/watch !value)]
-    (ks/Field {}
-              (e/fn []
-                (ks/Label {}
-                          (e/fn [] (dom/text "Example Input")))
-                (dom/input
-                 (dom/props {:type "text"
-                             :placeholder "Type something..."
-                             :value value
-                             :style {:padding "0.5rem"
-                                     :border "1px solid #d1d5db"
-                                     :border-radius "4px"
-                                     :width "100%"}})
-                 (dom/On "input" #(reset! !value (.. % -target -value)) nil))
-                (when (not (empty? value))
-                  (ks/FieldDescription {}
-                                       (e/fn [] (dom/text "You typed: " value))))))))
+    (ks2/field
+      (ks2/label (dom/text "Example Input"))
+      (dom/input
+       (dom/props {:type "text"
+                   :placeholder "Type something..."
+                   :value value
+                   :style {:padding "0.5rem"
+                           :border "1px solid #d1d5db"
+                           :border-radius "4px"
+                           :width "100%"}})
+       (dom/On "input" #(reset! !value (.. % -target -value)) nil))
+      (when (not (empty? value))
+        (ks2/field-description
+          (dom/text "You typed: " value))))))
 
 (e/defn AlertExample [params]
-  (ks/Alert {:data-color (:color params "info")}
-            (e/fn []
-              (dom/text (:message params "This is an alert from Komponentkassen.")))))
+  (ks2/alert {:data-color (:color params "info")}
+    (dom/text (:message params "This is an alert from Komponentkassen."))))
 
 (e/defn Main [ring-request]
   (e/client
@@ -118,20 +112,20 @@
                       :category "Typography"
                       :Component (e/fn [params]
                                   (dom/div
-                                   (ks/Heading {:level 1}
-                                               (e/fn [] (dom/text "Heading Level 1")))
-                                   (ks/Heading {:level 2}
-                                               (e/fn [] (dom/text "Heading Level 2")))
-                                   (ks/Heading {:level 3}
-                                               (e/fn [] (dom/text "Heading Level 3")))))}
+                                   (ks2/heading {:level 1}
+                                     (dom/text "Heading Level 1"))
+                                   (ks2/heading {:level 2}
+                                     (dom/text "Heading Level 2"))
+                                   (ks2/heading {:level 3}
+                                     (dom/text "Heading Level 3"))))}
                      
                      {:id "link-1"
                       :title "Link"
                       :description "A link component"
                       :category "Navigation"
                       :Component (e/fn [params]
-                                  (ks/Link {:href "#"}
-                                           (e/fn [] (dom/text "This is a link"))))}]})))))
+                                  (ks2/link {:href "#"}
+                                    (dom/text "This is a link")))}]})))))
 
 (defn electric-boot [ring-request]
   #?(:clj  (e/boot-server {} Main (e/server ring-request))

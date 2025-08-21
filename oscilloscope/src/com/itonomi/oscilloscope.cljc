@@ -2,7 +2,7 @@
   "A component gallery and storybook for Electric Clojure development"
   (:require [hyperfiddle.electric3 :as e]
             [hyperfiddle.electric-dom3 :as dom]
-            [com.itonomi.komponentkassen.shell :as ks]))
+            [com.itonomi.komponentkassen.shell2 :as ks2 :include-macros true]))
 
 (e/defn ParameterControl
   "Control for adjusting a component parameter"
@@ -20,24 +20,22 @@
    
    (case type
      :select
-     (ks/Select {:value (or value (first options))
-                 :style {:width "100%"}}
-                (e/fn []
-                  (dom/On "change" #(on-change (.. % -target -value)) nil)
-                  (e/for [option (e/diff-by identity options)]
-                    (ks/SelectOption {:value option
-                                      :selected (= option value)}
-                                     (e/fn [] (dom/text option))))))
+     (ks2/select {:value (or value (first options))
+                  :style {:width "100%"}}
+       (dom/On "change" #(on-change (.. % -target -value)) nil)
+       (e/for [option (e/diff-by identity options)]
+         (ks2/select-option {:value option
+                             :selected (= option value)}
+           (dom/text option))))
      
      :checkbox
-     (ks/Checkbox {:checked value}
-                  (e/fn []
-                    (dom/On "change" #(on-change (.. % -target -checked)) nil)))
+     (ks2/checkbox {:checked value}
+       (dom/On "change" #(on-change (.. % -target -checked)) nil))
      
      :text
      (dom/div
-      (ks/Input {:value value
-                 :style {:width "100%"}})
+      (ks2/input {:value value
+                  :style {:width "100%"}})
       (dom/On "input" #(on-change (.. % -target -value)) nil)))))
 
 (e/defn ComponentCard
