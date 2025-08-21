@@ -6,3 +6,11 @@ design-tokens-build
 **/.cpcache/
 **/.lsp/.cache/
 **/.DS_Store
+
+# Temporary files
+tmp/
+
+# Electric3 starter app test files
+electric3-starter-app/datalevin:mem:/
+electric3-starter-app/src/electric_starter_app/todo_app.cljc
+electric3-starter-app/src/electric_starter_app/todo_db.clj
