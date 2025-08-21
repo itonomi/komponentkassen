@@ -5,16 +5,19 @@
             [com.itonomi.komponentkassen.shell :as ks]))
 
 ;; Example components to showcase in the gallery
-(e/defn ButtonExample []
-  (ks/Button {}
+(e/defn ButtonExample [params]
+  (ks/Button {:data-variant (:variant params "primary")
+              :data-size (:size params "md")
+              :disabled (:disabled params false)}
              (e/fn []
-               (dom/text "Komponentkassen Button")
+               (dom/text (:text params "Click me"))
                (let [[t _] (e/Token (dom/On "click" identity nil))]
                  (when t
-                   (js/alert "Button clicked!")
+                   (when-not (:disabled params)
+                     (js/alert (str "Button clicked! Variant: " (:variant params))))
                    (t))))))
 
-(e/defn CardExample []
+(e/defn CardExample [params]
   (ks/Card {}
            (e/fn []
              (ks/CardBlock {}
@@ -24,7 +27,7 @@
                              (ks/Paragraph {}
                                            (e/fn [] (dom/text "This is a card component from Komponentkassen."))))))))
 
-(e/defn InputExample []
+(e/defn InputExample [params]
   (let [!value (atom "")
         value (e/watch !value)]
     (ks/Field {}
@@ -44,10 +47,10 @@
                   (ks/FieldDescription {}
                                        (e/fn [] (dom/text "You typed: " value))))))))
 
-(e/defn AlertExample []
-  (ks/Alert {:data-color "info"}
+(e/defn AlertExample [params]
+  (ks/Alert {:data-color (:color params "info")}
             (e/fn []
-              (dom/text "This is an informational alert from Komponentkassen."))))
+              (dom/text (:message params "This is an alert from Komponentkassen.")))))
 
 (e/defn Main [ring-request]
   (e/client
@@ -60,9 +63,27 @@
       (oscilloscope/Oscilloscope
        {:components [{:id "button-1"
                       :title "Komponentkassen Button"
-                      :description "A button component from the Komponentkassen design system"
+                      :description "A button component from the Komponentkassen design system with customizable variants, sizes, and states"
                       :category "Buttons"
-                      :Component ButtonExample}
+                      :Component ButtonExample
+                      :parameters [{:name :variant
+                                    :label "Variant"
+                                    :type :select
+                                    :options ["primary" "secondary" "tertiary" "danger"]
+                                    :default "primary"}
+                                   {:name :size
+                                    :label "Size"
+                                    :type :select
+                                    :options ["sm" "md" "lg"]
+                                    :default "md"}
+                                   {:name :disabled
+                                    :label "Disabled"
+                                    :type :checkbox
+                                    :default false}
+                                   {:name :text
+                                    :label "Button Text"
+                                    :type :text
+                                    :default "Click me"}]}
                      
                      {:id "card-1"
                       :title "Card Component"
@@ -78,15 +99,24 @@
                      
                      {:id "alert-1"
                       :title "Alert"
-                      :description "An alert component for displaying messages"
+                      :description "An alert component for displaying messages with different colors"
                       :category "Feedback"
-                      :Component AlertExample}
+                      :Component AlertExample
+                      :parameters [{:name :color
+                                    :label "Color"
+                                    :type :select
+                                    :options ["info" "success" "warning" "danger"]
+                                    :default "info"}
+                                   {:name :message
+                                    :label "Alert Message"
+                                    :type :text
+                                    :default "This is an alert from Komponentkassen."}]}
                      
                      {:id "heading-1"
                       :title "Headings"
                       :description "Different heading levels"
                       :category "Typography"
-                      :Component (e/fn []
+                      :Component (e/fn [params]
                                   (dom/div
                                    (ks/Heading {:level 1}
                                                (e/fn [] (dom/text "Heading Level 1")))
@@ -99,7 +129,7 @@
                       :title "Link"
                       :description "A link component"
                       :category "Navigation"
-                      :Component (e/fn []
+                      :Component (e/fn [params]
                                   (ks/Link {:href "#"}
                                            (e/fn [] (dom/text "This is a link"))))}]})))))
 

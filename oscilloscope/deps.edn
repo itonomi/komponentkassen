@@ -6,7 +6,7 @@
            ring/ring                      {:mvn/version "1.11.0"} ; to serve the app
            
            ;; For the component gallery
-           io.github.itonomi/komponentkassen {:git/sha "78ea7dcef343537de8ac8b1b193eb3c2f5e90458"}}
+           io.github.itonomi/komponentkassen {:local/root "../"}}
            
  :jvm-opts ["-Djdk.attach.allowAttachSelf"]
  :paths   ["src" "resources"]

@@ -532,7 +532,7 @@ font size!). To change the size please use :data-size"
 
  (e/defn Input
   "https://storybook.designsystemet.no/?path=/docs/komponenter-textfield--docs"
-  [props Body]
+  [props]
   (dom/input (dom/props (merge-props
                          {:class ["ds-input"]
                           :type "text"}

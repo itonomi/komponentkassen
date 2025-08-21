@@ -1,37 +1,99 @@
 (ns com.itonomi.oscilloscope
   "A component gallery and storybook for Electric Clojure development"
   (:require [hyperfiddle.electric3 :as e]
-            [hyperfiddle.electric-dom3 :as dom]))
+            [hyperfiddle.electric-dom3 :as dom]
+            [com.itonomi.komponentkassen.shell :as ks]))
+
+(e/defn ParameterControl
+  "Control for adjusting a component parameter"
+  [{:keys [label type options value on-change]}]
+  (dom/div
+   (dom/props {:style {:margin-bottom "1rem"}})
+   
+   (dom/label
+    (dom/props {:style {:display "block"
+                        :font-size "0.875rem"
+                        :font-weight "500"
+                        :margin-bottom "0.25rem"
+                        :color "#374151"}})
+    (dom/text label))
+   
+   (case type
+     :select
+     (ks/Select {:value (or value (first options))
+                 :style {:width "100%"}}
+                (e/fn []
+                  (dom/On "change" #(on-change (.. % -target -value)) nil)
+                  (e/for [option (e/diff-by identity options)]
+                    (ks/SelectOption {:value option
+                                      :selected (= option value)}
+                                     (e/fn [] (dom/text option))))))
+     
+     :checkbox
+     (ks/Checkbox {:checked value}
+                  (e/fn []
+                    (dom/On "change" #(on-change (.. % -target -checked)) nil)))
+     
+     :text
+     (dom/div
+      (ks/Input {:value value
+                 :style {:width "100%"}})
+      (dom/On "input" #(on-change (.. % -target -value)) nil)))))
 
 (e/defn ComponentCard
-  "Display a component in a card format with title and description"
-  [{:keys [title description]} Component]
-  (dom/div
-   (dom/props {:style {:border "1px solid #e5e7eb"
-                       :border-radius "8px"
-                       :padding "1.5rem"
-                       :margin-bottom "1.5rem"
-                       :background "white"}})
-   
-   (when title
-     (dom/h3
-      (dom/props {:style {:margin-bottom "0.5rem"
-                          :font-size "1.125rem"
-                          :font-weight "600"}})
-      (dom/text title)))
-   
-   (when description
-     (dom/p
-      (dom/props {:style {:margin-bottom "1rem"
-                          :color "#6b7280"
-                          :font-size "0.875rem"}})
-      (dom/text description)))
-   
-   (dom/div
-    (dom/props {:style {:padding "1rem"
-                        :background "#f9fafb"
-                        :border-radius "4px"}})
-    (Component))))
+  "Display a component in a card format with title, description, and parameter controls"
+  [{:keys [title description parameters]} Component]
+  (let [!params (atom (into {} (map (fn [p] [(:name p) (:default p)]) parameters)))
+        params (e/watch !params)]
+    (dom/div
+     (dom/props {:style {:border "1px solid #e5e7eb"
+                         :border-radius "8px"
+                         :padding "1.5rem"
+                         :margin-bottom "1.5rem"
+                         :background "white"}})
+     
+     (when title
+       (dom/h3
+        (dom/props {:style {:margin-bottom "0.5rem"
+                            :font-size "1.125rem"
+                            :font-weight "600"}})
+        (dom/text title)))
+     
+     (when description
+       (dom/p
+        (dom/props {:style {:margin-bottom "1rem"
+                            :color "#6b7280"
+                            :font-size "0.875rem"}})
+        (dom/text description)))
+     
+     ;; Parameter controls
+     (when (seq parameters)
+       (dom/div
+        (dom/props {:style {:margin-bottom "1rem"
+                            :padding "1rem"
+                            :background "#f3f4f6"
+                            :border-radius "4px"}})
+        
+        (dom/h4
+         (dom/props {:style {:font-size "0.875rem"
+                             :font-weight "600"
+                             :margin-bottom "0.75rem"}})
+         (dom/text "Parameters"))
+        
+        (e/for [param (e/diff-by :name parameters)]
+          (ParameterControl
+           {:label (:label param)
+            :type (:type param)
+            :options (:options param)
+            :value (get params (:name param))
+            :on-change #(swap! !params assoc (:name param) %)}))))
+     
+     ;; Component preview
+     (dom/div
+      (dom/props {:style {:padding "1rem"
+                          :background "#f9fafb"
+                          :border-radius "4px"}})
+      (Component params)))))
 
 (e/defn CategorySection
   "Group components by category"
@@ -160,7 +222,8 @@
        (e/for [component-data (e/diff-by :id filtered-components)]
          (ComponentCard
           {:title (:title component-data)
-           :description (:description component-data)}
+           :description (:description component-data)
+           :parameters (:parameters component-data)}
           (:Component component-data))))))))
 
 ;; Example usage - developers would add their components here
