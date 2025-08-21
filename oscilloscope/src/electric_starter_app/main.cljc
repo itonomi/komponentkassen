@@ -2,7 +2,8 @@
   (:require [hyperfiddle.electric3 :as e]
             [hyperfiddle.electric-dom3 :as dom]
             [com.itonomi.oscilloscope :as oscilloscope]
-            [com.itonomi.komponentkassen.shell2 :as ks2 :include-macros true]))
+            [com.itonomi.komponentkassen.shell2 :as ks2 :include-macros true]
+            [com.itonomi.komponentkassen.aksel-icons :as icons]))
 
 ;; Example components to showcase in the gallery
 (e/defn ButtonExample [params]
@@ -125,7 +126,179 @@
                       :category "Navigation"
                       :Component (e/fn [params]
                                   (ks2/link {:href "#"}
-                                    (dom/text "This is a link")))}]})))))
+                                    (dom/text "This is a link")))}
+                     
+                     ;; Icon examples
+                     {:id "icon-airplane"
+                      :title "Airplane Icon"
+                      :description "Airplane icon from Aksel icons"
+                      :category "Icons"
+                      :parameters [{:name :size
+                                    :label "Size"
+                                    :type :select
+                                    :options ["1em" "1.5em" "2em" "3em" "4em"]
+                                    :default "2em"}
+                                   {:name :color
+                                    :label "Color"
+                                    :type :select
+                                    :options ["currentColor" "#3b82f6" "#ef4444" "#10b981" "#f59e0b"]
+                                    :default "currentColor"}]
+                      :Component (e/fn [params]
+                                  (dom/div
+                                   (dom/props {:style {:font-size (:size params)
+                                                       :color (:color params)}})
+                                   (icons/Airplane)))}
+                     
+                     {:id "icon-heart"
+                      :title "Heart Icon"
+                      :description "Heart icon (regular and filled)"
+                      :category "Icons"
+                      :parameters [{:name :filled
+                                    :label "Filled"
+                                    :type :checkbox
+                                    :default false}
+                                   {:name :size
+                                    :label "Size"
+                                    :type :select
+                                    :options ["1em" "1.5em" "2em" "3em" "4em"]
+                                    :default "2em"}
+                                   {:name :color
+                                    :label "Color"
+                                    :type :select
+                                    :options ["currentColor" "#ef4444" "#ec4899" "#f59e0b"]
+                                    :default "#ef4444"}]
+                      :Component (e/fn [params]
+                                  (dom/div
+                                   (dom/props {:style {:font-size (:size params)
+                                                       :color (:color params)}})
+                                   (if (:filled params)
+                                     (icons/HeartFill)
+                                     (icons/Heart))))}
+                     
+                     {:id "icon-bell"
+                      :title "Bell Icon"
+                      :description "Bell notification icons"
+                      :category "Icons"
+                      :parameters [{:name :variant
+                                    :label "Variant"
+                                    :type :select
+                                    :options ["regular" "filled" "dot" "dot-filled"]
+                                    :default "regular"}
+                                   {:name :size
+                                    :label "Size"
+                                    :type :select
+                                    :options ["1em" "1.5em" "2em" "3em"]
+                                    :default "1.5em"}]
+                      :Component (e/fn [params]
+                                  (dom/div
+                                   (dom/props {:style {:font-size (:size params)}})
+                                   (case (:variant params)
+                                     "regular" (icons/Bell)
+                                     "filled" (icons/BellFill)
+                                     "dot" (icons/BellDot)
+                                     "dot-filled" (icons/BellDotFill)
+                                     (icons/Bell))))}
+                     
+                     {:id "icon-collection"
+                      :title "Icon Collection Sample"
+                      :description "A collection of various icons"
+                      :category "Icons"
+                      :Component (e/fn [params]
+                                  (dom/div
+                                   (dom/props {:style {:display "flex"
+                                                       :gap "1rem"
+                                                       :flex-wrap "wrap"
+                                                       :font-size "2em"}})
+                                   (icons/House)
+                                   (icons/Person)
+                                   (icons/Cog)
+                                   (icons/Calendar)
+                                   (icons/EnvelopeClosed)
+                                   (icons/Phone)
+                                   (icons/MagnifyingGlass)
+                                   (icons/ShoppingBasket)
+                                   (icons/Checkmark)
+                                   (icons/XMark)))}
+                     
+                     {:id "icon-arrows"
+                      :title "Arrow Icons"
+                      :description "Various arrow and navigation icons"
+                      :category "Icons"
+                      :parameters [{:name :size
+                                    :label "Size"
+                                    :type :select
+                                    :options ["1em" "1.5em" "2em" "3em"]
+                                    :default "2em"}]
+                      :Component (e/fn [params]
+                                  (dom/div
+                                   (dom/props {:style {:display "flex"
+                                                       :gap "1rem"
+                                                       :flex-wrap "wrap"
+                                                       :font-size (:size params)}})
+                                   (icons/ArrowUp)
+                                   (icons/ArrowDown)
+                                   (icons/ArrowLeft)
+                                   (icons/ArrowRight)
+                                   (icons/ChevronUp)
+                                   (icons/ChevronDown)
+                                   (icons/ChevronLeft)
+                                   (icons/ChevronRight)
+                                   (icons/CaretUp)
+                                   (icons/CaretDown)))}
+                     
+                     {:id "icon-files"
+                      :title "File & Document Icons"
+                      :description "File types and document related icons"
+                      :category "Icons"
+                      :Component (e/fn [params]
+                                  (dom/div
+                                   (dom/props {:style {:display "flex"
+                                                       :gap "1rem"
+                                                       :flex-wrap "wrap"
+                                                       :font-size "2em"
+                                                       :color "#374151"}})
+                                   (icons/File)
+                                   (icons/FileFill)
+                                   (icons/FileText)
+                                   (icons/FilePdf)
+                                   (icons/FileImage)
+                                   (icons/FileCode)
+                                   (icons/Folder)
+                                   (icons/FolderFill)
+                                   (icons/FolderPlus)
+                                   (icons/Files)))}
+                     
+                     {:id "icon-transport"
+                      :title "Transportation Icons"
+                      :description "Various transportation and vehicle icons"
+                      :category "Icons"
+                      :parameters [{:name :filled
+                                    :label "Filled versions"
+                                    :type :checkbox
+                                    :default false}]
+                      :Component (e/fn [params]
+                                  (dom/div
+                                   (dom/props {:style {:display "flex"
+                                                       :gap "1rem"
+                                                       :flex-wrap "wrap"
+                                                       :font-size "2em"
+                                                       :color "#3b82f6"}})
+                                   (if (:filled params)
+                                     (icons/AirplaneFill)
+                                     (icons/Airplane))
+                                   (if (:filled params)
+                                     (icons/CarFill)
+                                     (icons/Car))
+                                   (if (:filled params)
+                                     (icons/BusFill)
+                                     (icons/Bus))
+                                   (if (:filled params)
+                                     (icons/BoatFill)
+                                     (icons/Boat))
+                                   (icons/Bicycle)
+                                   (if (:filled params)
+                                     (icons/MotorcycleFill)
+                                     (icons/Motorcycle))))}]})))))
 
 (defn electric-boot [ring-request]
   #?(:clj  (e/boot-server {} Main (e/server ring-request))

@@ -2,7 +2,8 @@
   "A component gallery and storybook for Electric Clojure development"
   (:require [hyperfiddle.electric3 :as e]
             [hyperfiddle.electric-dom3 :as dom]
-            [com.itonomi.komponentkassen.shell2 :as ks2 :include-macros true]))
+            [com.itonomi.komponentkassen.shell2 :as ks2 :include-macros true]
+            [com.itonomi.komponentkassen.aksel-icons :as icons]))
 
 (e/defn ParameterControl
   "Control for adjusting a component parameter"
@@ -224,31 +225,3 @@
            :parameters (:parameters component-data)}
           (:Component component-data))))))))
 
-;; Example usage - developers would add their components here
-(e/defn ExampleGallery []
-  (Oscilloscope
-   {:components [{:id "button-1"
-                  :title "Primary Button"
-                  :description "A standard primary button component"
-                  :category "Buttons"
-                  :Component (e/fn []
-                              (dom/button
-                               (dom/props {:style {:padding "0.5rem 1rem"
-                                                   :background "#3b82f6"
-                                                   :color "white"
-                                                   :border "none"
-                                                   :border-radius "4px"
-                                                   :cursor "pointer"}})
-                               (dom/text "Click me")))}
-                 
-                 {:id "input-1"
-                  :title "Text Input"
-                  :description "A basic text input field"
-                  :category "Forms"
-                  :Component (e/fn []
-                              (dom/input
-                               (dom/props {:type "text"
-                                           :placeholder "Enter text..."
-                                           :style {:padding "0.5rem"
-                                                   :border "1px solid #d1d5db"
-                                                   :border-radius "4px"}})))}]}))
