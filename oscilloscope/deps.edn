@@ -1,0 +1,25 @@
+{:deps    {com.hyperfiddle/electric       {:mvn/version "v3-alpha-SNAPSHOT"}
+           org.clojure/clojure            {:mvn/version "1.12.0"}
+           org.clojure/clojurescript      {:mvn/version "1.11.121"}
+           org.clojure/tools.logging      {:mvn/version "1.2.4"}
+           ch.qos.logback/logback-classic {:mvn/version "1.4.14"}
+           ring/ring                      {:mvn/version "1.11.0"} ; to serve the app
+           
+           ;; For the component gallery
+           io.github.itonomi/komponentkassen {:git/sha "78ea7dcef343537de8ac8b1b193eb3c2f5e90458"}}
+           
+ :jvm-opts ["-Djdk.attach.allowAttachSelf"]
+ :paths   ["src" "resources"]
+ :aliases {:dev {:extra-paths ["src-dev"]
+                 :extra-deps {thheller/shadow-cljs {:mvn/version "2.26.2"}}}
+           
+           :prod {:extra-paths ["src-prod"]
+                  :extra-deps {com.google.javascript/closure-compiler-unshaded {:mvn/version "v20230802"}}}
+           
+           :build ; use `clj -X:build build-client`, NOT -T!
+           {:extra-paths ["src-build"]
+            :ns-default  build
+            :extra-deps  {thheller/shadow-cljs          {:mvn/version "2.26.2"}
+                          io.github.clojure/tools.build {:mvn/version "0.10.8"}}}}
+ :mvn/repos
+ {"clojars" {:url "https://repo.clojars.org/" :snapshots {:enabled true :update :always}}}}
