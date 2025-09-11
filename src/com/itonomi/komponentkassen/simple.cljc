@@ -24,7 +24,7 @@
    ;; We could do target-value instead of identity, but then the consumer 
    ;; loses the ability for transactional event processing. Better to just
    ;; return the event.
-   (dom/On "change" identity selected-option)))
+   (dom/On "change" identity nil)))
 
 
 (e/defn SpinnerButton0 
@@ -40,4 +40,4 @@
          (case (reset! !loading true)
            (case (OnClick)
              (case (reset! !loading false)
-               (t))))))))) 
+               (t)))))))))

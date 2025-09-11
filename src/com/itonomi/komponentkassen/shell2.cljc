@@ -834,7 +834,7 @@
                                        :viewBox     "0 0 50 50"
                                        :aria-hidden "true"
                                        :data-size   "sm"}
-                                      props))
+                                      ~props))
      
               (svg/circle (dom/props {:class        "ds-spinner__background"
                                       :cx           25
