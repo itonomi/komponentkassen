@@ -8,6 +8,14 @@
             [hyperfiddle.electric-dom3 :as dom]
             [hyperfiddle.electric-svg3 :as svg]))
 
+;; IDEA
+;; We are currently checked whether the first arg is a map at macroexpand time.
+;; We ought to check it at runtime, so that we can do something like
+;;
+;; (ks2/whatever (expression (that) (computes-props)))
+;;
+;; I'll see with further use
+
 (defn merge-prop-pair [left right]
   (if (or (map? left) (map? right))
     (merge left right)
@@ -810,3 +818,34 @@
                             :data-variant "rectangle"}
                            ~props))
                ~@children)))
+
+
+
+
+;; Not sure if this belongs here?? I think it does, just not sure why it's not here in the first place
+;;
+;; We're at the point where the library is seeded, it's fine to maintain things by need now.
+(defmacro spinner [& args]
+  (let [[props & children] (if (map? (first args))
+                             args
+                             (cons {} args))]
+    `(svg/svg (dom/props (merge-props {:class       "ds-spinner"
+                                       :role        "img"
+                                       :viewBox     "0 0 50 50"
+                                       :aria-hidden "true"
+                                       :data-size   "sm"}
+                                      props))
+     
+              (svg/circle (dom/props {:class        "ds-spinner__background"
+                                      :cx           25
+                                      :cy           25
+                                      :r            20
+                                      :fill         "none"
+                                      :stroke-width 5}))
+     
+              (svg/circle (dom/props {:class        "ds-spinner__circle"
+                                      :cx           25
+                                      :cy           25
+                                      :r            20
+                                      :fill         "none"
+                                      :stroke-width 5})))))

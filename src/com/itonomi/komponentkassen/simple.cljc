@@ -2,7 +2,10 @@
   {:clj-kondo/ignore true}
   (:require [hyperfiddle.electric3 :as e]
             [hyperfiddle.electric-dom3 :as dom]
-            [com.itonomi.komponentkassen.shell2 :as ks2]))
+            [com.itonomi.komponentkassen.shell2 :as ks2]
+            ))
+
+;; Simple components with behaviour built on top of shell2
 
 #?(:cljs
    (defn target-value [ev]
@@ -21,6 +24,20 @@
    ;; We could do target-value instead of identity, but then the consumer 
    ;; loses the ability for transactional event processing. Better to just
    ;; return the event.
-   (dom/On "change" identity nil)))
+   (dom/On "change" identity selected-option)))
 
-;; Simple components with behaviour built on top of shell2
+
+(e/defn SpinnerButton0 
+  "A button which renders a spinner loading animation until the OnClick callback yields"
+  [label OnClick]
+  (ks2/button
+   (let [!loading (atom false)]
+     (when (e/watch !loading) (ks2/spinner))
+     (dom/text label)
+     (let [e (dom/On "click" identity nil)
+           [t err] (e/Token e)]
+       (when t
+         (case (reset! !loading true)
+           (case (OnClick)
+             (case (reset! !loading false)
+               (t))))))))) 
