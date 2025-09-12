@@ -80,6 +80,7 @@ echo 'These icons belong to Nav and are licensed according to https://github.com
 mv /tmp/aksel_DELETEME/@navikt/aksel-icons/icons/*.svg resources/public/komponentkassen/icons
 rm -rf /tmp/aksel_DELETEME
 
+bb generate-icons.bb
 ```
 
 **HTML -> Electric prompt** - I use it with *Electric Clojure Hypermind* GPT
