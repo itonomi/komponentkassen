@@ -13,18 +13,24 @@
 
 ;; Options: [{:value "whatever" :content "text or (e/fn [])"} ...]
 ;; Returns change events
-(e/defn Select0 [label selected-option options]
-  (ks2/field
-   (ks2/label (dom/text label))
-   (ks2/select
-    (e/for [option (e/diff-by :value options)]
-      (ks2/select-option
-       {:value (:value option)}
-       (dom/text (:content option)))))
-   ;; We could do target-value instead of identity, but then the consumer 
-   ;; loses the ability for transactional event processing. Better to just
-   ;; return the event.
-   (dom/On "change" identity nil)))
+(e/defn Select0 
+  ;; The enabled/disabled arity is NOT thought out
+  ([label selected-option options disabled?]
+   (ks2/field
+    (ks2/label (dom/text label))
+    (ks2/select 
+     (when disabled? (dom/props {:disabled disabled?}))
+     (e/for [option (e/diff-by :value options)]
+       (ks2/select-option
+        {:selected (#{selected-option} (:value option))
+         :value (:value option)}
+        (dom/text (:content option)))))
+    ;; We could do target-value instead of identity, but then the consumer 
+    ;; loses the ability for transactional event processing. Better to just
+    ;; return the event.
+    (when-not disabled? (dom/On "change" identity nil))))
+  ([label selected-option options]
+   (Select0 label selected-option options false)))
 
 
 (e/defn SpinnerButton0 
