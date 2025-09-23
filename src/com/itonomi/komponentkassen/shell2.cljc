@@ -21,8 +21,16 @@
     (merge left right)
     right))
 
+(defn translate-variant-prop [props]
+  (if (or (contains? props :variant) (contains? props "variant"))
+    (let [variant-value (or (:variant props) (get props "variant"))
+          cleaned-props (dissoc props :variant "variant")]
+      (assoc cleaned-props :data-variant variant-value))
+    props))
+
 (defn merge-props [left right]
-  (merge-with merge-prop-pair left right))
+  (-> (merge-with merge-prop-pair left right)
+      translate-variant-prop))
 
 (defmacro button [& args]
   (let [[props & children] (if (map? (first args))
