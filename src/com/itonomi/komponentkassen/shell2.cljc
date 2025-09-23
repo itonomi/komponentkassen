@@ -21,16 +21,37 @@
     (merge left right)
     right))
 
-(defn translate-variant-prop [props]
-  (if (or (contains? props :variant) (contains? props "variant"))
-    (let [variant-value (or (:variant props) (get props "variant"))
-          cleaned-props (dissoc props :variant "variant")]
-      (assoc cleaned-props :data-variant variant-value))
-    props))
+(def data-attributes
+  #{"active" "border" "chromatic" "color" "color-scheme" "colors" "command"
+    "count" "creatable" "featured" "field" "hover" "icon" "index" "initials"
+    "is-main" "level" "mobile" "modal" "multiple" "open" "overlap" "placement"
+    "popover" "position" "pseudo-state" "size" "sr-plural" "sr-singular"
+    "sticky-header" "testid" "text" "theme" "typography" "value" "variant"
+    "weight" "width" "zebra"})
+
+(defn translate-data-props [props]
+  (reduce (fn [acc attr]
+            (let [kw-key (keyword attr)
+                  str-key attr
+                  data-key (keyword (str "data-" attr))]
+              (cond
+                (contains? acc kw-key)
+                (-> acc
+                    (dissoc kw-key)
+                    (assoc data-key (get acc kw-key)))
+
+                (contains? acc str-key)
+                (-> acc
+                    (dissoc str-key)
+                    (assoc data-key (get acc str-key)))
+
+                :else acc)))
+          props
+          data-attributes))
 
 (defn merge-props [left right]
   (-> (merge-with merge-prop-pair left right)
-      translate-variant-prop))
+      translate-data-props))
 
 (defmacro button [& args]
   (let [[props & children] (if (map? (first args))
