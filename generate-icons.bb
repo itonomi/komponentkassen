@@ -38,7 +38,20 @@
 (defn parse-element [element-str]
   (when-let [[_ tag attrs-str] (re-matches #"<(\w+)([^>]*)/?>" element-str)]
     {:tag tag
-     :attrs (parse-svg-attributes attrs-str)}))
+     :attrs (-> (parse-svg-attributes attrs-str)
+                (update :fill (fn [fill]
+                                (when fill
+                                  (if (= fill "#202733")
+                                    "currentColor"
+                                    fill))))
+                (update :stroke (fn [stroke]
+                                  (when stroke
+                                    (if (= stroke "#202733")
+                                      "currentColor"
+                                      stroke))))
+                (#(cond-> %
+                    (nil? (:fill %)) (dissoc :fill)
+                    (nil? (:stroke %)) (dissoc :stroke))))}))
 
 (defn svg-content->electric [svg-content icon-name]
   (let [lines (str/split-lines svg-content)
